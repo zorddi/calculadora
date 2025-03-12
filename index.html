@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Calculadora</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.1/math.min.js"></script>
+</head>
+<body>
+    <main class="container">
+        <section>
+            <label class="visor" for="output">
+                <span class="sr-only">calc output and interation</span>
+                <input type="text" name="calc_output_and_interation" id="output">
+            </label>
+        </section>
+        <section class="buttons">
+            <div class="button number">1</div>
+            <div class="button number">2</div>
+            <div class="button number">3</div>
+            <button class="button operator" disabled>÷</button>
+            <div class="button number">4</div>
+            <div class="button number">5</div>
+            <div class="button number">6</div>
+            <button class="button operator" disabled>×</button>
+            <div class="button number">7</div>
+            <div class="button number">8</div>
+            <div class="button number">9</div>
+            <button class="button operator" disabled>-</button>
+            <div class="button number zero">0</div>
+            <button class="button" id="point" disabled>.</button> <!-- Class name is important for js -->
+            <button class="button operator" disabled>+</button>
+            <div id="equal">=</div>
+            <button id="clear"><i class="fa fa-broom"></i></button>
+        </section>
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>

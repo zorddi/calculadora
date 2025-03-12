@@ -1,0 +1,176 @@
+/* ==============================================
+ * Prefix
+ * ==============================================
+*/
+
+:root {
+    /* Colors */
+    --color-one: #264653;
+    --color-two: #2a9d8f;
+    --color-three: #e9c46a;
+    --color-four: #f4a261;
+    --color-five: #e76f51;
+    
+    
+    --color: color-mix(in srgb, var(--color-one), black 30%);
+    --color-main-outline: color-mix(in srgb, var(--color-three), white 50%);
+    
+    /* Fonts */
+    --font-base: "Outfit", sans-serif;
+}
+
+/* ==============================================
+ * Document
+ * ==============================================
+*/
+
+*, *::before, *::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html.html {
+    font-family: var(--font-base);
+    font-size: 16px;
+}
+
+body {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to top, var(--color-four), var(--color-three));
+}
+
+.sr-only {
+    position: absolute;  /* Retira o item do fluxo normal do layout */
+    width: 1px;          /* Define a largura mínima */
+    height: 1px;         /* Define a altura mínima */
+    margin: -1px;        /* Garante que o elemento não ocupe espaço extra */
+    padding: 0;          /* Remove qualquer espaçamento */
+    border: 0;           /* Remove qualquer borda */
+    clip: rect(0, 0, 0, 0); /* Faz com que o elemento fique completamente fora da tela */
+    overflow: hidden;    /* Garante que nada escape do elemento */
+}
+
+/* ==============================================
+ * Main
+ * ==============================================
+*/
+
+main.container {
+    position: relative;
+    max-width: 300px;
+    overflow: hidden;
+    outline: 5px solid var(--color-main-outline);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    background: var(--color);
+    color: var(--color-one);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .5);
+}
+main.container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 80%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: var(--color-one);
+    filter: blur(100px);
+}
+
+section {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==============================================
+ * Section: input
+ * ==============================================
+*/
+
+label.visor {
+    --color: color-mix(in srgb, var(--color-three), white 10%);
+    position: relative;
+    display: flex;
+    height: max-content;
+    overflow: hidden;
+    border: 2px solid var(--color-main-outline);
+    border-radius: .75rem;
+    margin-bottom: 1rem;
+}
+label.visor::before, label.visor::after {
+    content: "";
+    position: absolute;
+    right: 5%;
+    width: 40px;
+    height: 100%;
+    clip-path: polygon(50% 0%, 100% 0%, 50% 100%, 0% 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, .3), transparent);
+    transform: scale(1.2);
+}
+label.visor::after {
+    right: 15%;
+    transform: scale(1);
+}
+
+input#output {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-base);
+    font-weight: 600;
+    font-size: 2.5rem;
+    text-align: right;
+    outline: none;
+    border: none;
+    padding: 1rem;
+    padding-left: 0;
+    background: var(--color);
+    color: var(--color-one);
+    caret-color: var(--color);
+}
+
+/* ==============================================
+ * Section: buttons
+ * ==============================================
+*/
+
+section.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: .5rem;
+}
+
+section :where(.button, #equal, #clear) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-size: 2rem;
+    border: none;
+    border-radius: .75rem;
+    background: rgba(0, 0, 0, .2);
+    color: color-mix(in srgb, var(--color-one), white 90%);
+    cursor: pointer;
+}
+section :where(.button:hover, #equal:hover, #clear:hover) {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.zero {
+    grid-column: span 2;
+}
+
+#equal {
+    grid-column: span 3;
+}
+
+#clear {
+    font-size: 1.5rem;
+}
