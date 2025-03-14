@@ -1,69 +1,83 @@
-class Id {
-    constructor(id){
-        return document.getElementById(id);
+const Get = {
+    id(name){
+        return document.getElementById(name);
+    },
+    query(name){
+        return document.querySelector(name);
+    },
+    queryAll(name){
+        return document.querySelectorAll(name);
     }
 }
 
-class Query extends Id {
-    constructor(element){
-        super(element);
-        return document.querySelector(element);
+function flexEventListener(element, event, callback){
+    if (!event){
+        console.error('Função "flexEventListener()" encerrada: o parâmetro "event" está ausente. Verifique e forneça o evento corretamente.');
+        return null;
     }
-}
 
-class QueryAll extends Query {
-    constructor(element){
-        return document.querySelectorAll(element);
+    if (typeof event !== "string"){
+        console.error('Função "flexEventListener()" encerrada: o parâmetro "event" deve ser uma string. Verifique e forneça um valor válido para o evento.');
+        return null;
     }
-}
 
-const historyDiv = new Id('history');
-const clear = new Id('clear');
-const output = new Id('output');
-const buttons = new QueryAll('.button');
-const typeNumber = new QueryAll('.number');
-const typeOperator = new QueryAll('.operator');
-const point = new Id('point');
-const equalButton = new Id('equal');
+    if (typeof callback !== "function") {
+        console.error("Função 'flexEventListener()' encerrada: o parâmetro 'callback' deve ser uma função. Verifique e forneça uma função válida.");
+        return null;
+    }
 
-point.disabled = false;
-
-buttons.forEach((e) => {
-    e.addEventListener('click', function(){
-        output.value += this.textContent;
-        historyDiv.innerText += this.textContent;
-    });
-});
-
-typeNumber.forEach((e) => {
-    e.addEventListener('click', () => {
-        typeOperator.forEach((operator) => {
-            operator.disabled = false;
+    const addListener = (e) => {
+        e.addEventListener(event, function(){
+            callback.call(this);
         });
-    });
+    }
+
+    if (element instanceof NodeList || Array.isArray(element)){
+        element.forEach(addListener);
+    } else{
+        addListener(element);
+    }
+}
+
+// Selecionando elementos e colocando em uma variável
+const clear = Get.id('clear');
+const output = Get.id('output');
+const buttons = Get.queryAll('.button');
+const typeNumber = Get.queryAll('.number');
+const typeOperator = Get.queryAll('.operator');
+const point = Get.id('point');
+const equalButton = Get.id('equal');
+
+flexEventListener(buttons, 'click', function(){
+    output.value += this.textContent;
 });
 
-typeOperator.forEach((e) => {
-    e.addEventListener('click', () => {
-        e.disabled = true;
-        point.disabled = false;
-    });
-});
-
-point.addEventListener('click', () => {
-    point.disabled = true;
-});
-
-clear.addEventListener('click', () => {
-    output.value = '';
-    point.disabled = true;
+flexEventListener(typeNumber, 'click', function(){
     typeOperator.forEach((operator) => {
-        operator.disabled = true;
+        operator.removeAttribute('disabled');
     });
-
 });
 
-equal.addEventListener('click', () => {
+flexEventListener(typeOperator, 'click', function(){
+    typeOperator.forEach((all) => {
+        all.setAttribute('disabled', 'true');
+    });
+    point.removeAttribute('disabled');
+});
+
+flexEventListener(point, 'click', function(){
+    point.setAttribute('disabled', 'true');
+});
+
+flexEventListener(clear, 'click', function(){
+    output.value = '';
+    point.removeAttribute('disabled');
+    typeOperator.forEach(all => {
+        all.setAttribute('disabled', 'true');
+    });
+});
+
+flexEventListener(equal, 'click', function(){
     const value = output.value.replace('÷', '/').replace('×', '*');
     try {
         const calc = math.evaluate(value);
