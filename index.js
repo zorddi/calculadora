@@ -71,8 +71,6 @@ const clear = Get.id('clear');
 
 // Selecionando Class
 const buttons = Get.queryAll('.button');
-const typeNumber = Get.queryAll('.number');
-const typeOperator = Get.queryAll('.operator');
 
 // Se o atributo "readonly" for removido, ele será inserido logo em seguida
 let observer = new MutationObserver(() => {
