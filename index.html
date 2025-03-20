@@ -14,31 +14,32 @@
 <body>
     <main class="container">
         <section>
-            <label class="visor" for="output">
+            <label class="visor" for="display">
                 <span class="sr-only">calc output and interation</span>
-                <input type="text" name="calc_output_and_interation" id="output">
+                <input type="text" name="calc_output_and_interation" id="display" readonly="true">
             </label>
         </section>
         <section class="buttons">
             <div class="button number">1</div>
             <div class="button number">2</div>
             <div class="button number">3</div>
-            <button class="button operator" disabled>÷</button>
+            <button class="button operator">÷</button>
             <div class="button number">4</div>
             <div class="button number">5</div>
             <div class="button number">6</div>
-            <button class="button operator" disabled>×</button>
+            <button class="button operator">×</button>
             <div class="button number">7</div>
             <div class="button number">8</div>
             <div class="button number">9</div>
-            <button class="button operator" disabled>-</button>
+            <button class="button operator">-</button>
             <div class="button number zero">0</div>
             <button class="button" id="point">.</button>
-            <button class="button operator" disabled>+</button>
+            <button class="button operator">+</button>
             <div id="equal">=</div>
-            <button id="clear"><i class="fa fa-broom"></i></button>
+            <button id="clear">C</button>
         </section>
     </main>
+
     <script src="index.js"></script>
 </body>
 </html>
