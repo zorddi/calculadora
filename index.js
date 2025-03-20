@@ -70,6 +70,8 @@ const equalButton = Get.id('equal');
 const clear = Get.id('clear');
 
 // Selecionando Class
+const typeNumber = Get.queryAll('.number');
+const typeOperator = Get.queryAll('.operator);
 const buttons = Get.queryAll('.button');
 
 // Se o atributo "readonly" for removido, ele será inserido logo em seguida
