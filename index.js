@@ -111,8 +111,7 @@ const equalButton = Get.id('equal');
 const clear = Get.id('clear');
 
 // Selecionando Class
-const typeNumber = Get.queryAll('.number');
-const typeOperator = Get.queryAll('.operator);
+const typeOperator = Get.queryAll('.operator');
 const buttons = Get.queryAll('.button');
 
 
